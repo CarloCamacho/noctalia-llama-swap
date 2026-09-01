@@ -1,0 +1,58 @@
+id = "carlocamacho/llama-swap"
+name = "llama-swap"
+version = "0.2.0"
+plugin_api = 28
+author = "CarloCamacho"
+license = "MIT"
+dependencies = []
+tags = ["bar", "panel", "service", "ai", "network"]
+icon = "cpu"
+description = "Monitor and control llama-swap from the bar: live tok/s stats and one-click model load/unload."
+
+[[setting]]
+key = "server_url"
+type = "string"
+label_key = "settings.server_url.label"
+description_key = "settings.server_url.description"
+default = "http://localhost:8080"
+
+[[setting]]
+key = "api_key"
+type = "string"
+label_key = "settings.api_key.label"
+description_key = "settings.api_key.description"
+default = ""
+
+[[setting]]
+key = "refresh_interval"
+type = "int"
+label_key = "settings.refresh_interval.label"
+description_key = "settings.refresh_interval.description"
+default = 5
+min = 3
+max = 120
+
+[[widget]]
+id = "status"
+entry = "widget.luau"
+
+  [[widget.setting]]
+  key = "show_loaded_model"
+  type = "bool"
+  label_key = "settings.show_loaded_model.label"
+  description_key = "settings.show_loaded_model.description"
+  default = true
+
+[[service]]
+id = "poller"
+entry = "service.luau"
+
+[[panel]]
+id = "manager"
+entry = "panel.luau"
+width = 520
+height = 640
+placement = "floating"
+position = "center"
+open_near_click = true
+dismiss_on_outside_click = true

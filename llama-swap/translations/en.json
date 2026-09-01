@@ -1,0 +1,60 @@
+{
+  "widget": {
+    "tooltip_loaded": "{model} ready",
+    "tooltip_loaded_count": "{count} model(s) ready",
+    "tooltip_idle": "llama-swap: idle",
+    "status_connected": "Connected",
+    "status_auth_failed": "Authentication failed",
+    "status_unreachable": "Server unreachable",
+    "status_error": "Error talking to llama-swap",
+    "status_unconfigured": "Set server URL in plugin settings"
+  },
+  "panel": {
+    "summary_line": "Last request {last_tps} tok/s · {requests} requests · {out_tokens} tokens out",
+    "summary_no_data": "Connected — no requests yet",
+    "recent_requests": "RECENT",
+    "activity_line": "{tps} tok/s · {model} · {duration} · {when}",
+    "state_loaded": "loaded",
+    "state_loading": "loading…",
+    "state_unloaded": "unloaded",
+    "btn_load": "Load model",
+    "btn_unload": "Unload model",
+    "not_configured": "Set your llama-swap server URL in plugin settings.",
+    "auth_failed": "Authentication failed — check the API key in settings.",
+    "unreachable": "Cannot reach llama-swap — check the server URL.",
+    "no_models": "No models configured on the server.",
+    "status_connected": "Connected",
+    "status_auth_failed": "Auth failed",
+    "status_unreachable": "Unreachable",
+    "status_error": "Error",
+    "status_unconfigured": "Not configured",
+    "time_now": "now",
+    "time_min": "{n}m ago",
+    "time_hour": "{n}h ago",
+    "time_day": "{n}d ago"
+  },
+  "settings": {
+    "server_url": {
+      "label": "Server URL",
+      "description": "Base URL of your llama-swap server, e.g. http://localhost:8080"
+    },
+    "api_key": {
+      "label": "API key",
+      "description": "Leave empty if llama-swap runs without apiKeys configured."
+    },
+    "refresh_interval": {
+      "label": "Refresh interval (seconds)",
+      "description": "How often to poll the server. Minimum 3."
+    },
+    "show_loaded_model": {
+      "label": "Show loaded model name in bar",
+      "description": "Display the ready model's name next to the icon."
+    }
+  },
+  "notifications": {
+    "auth_failed": "llama-swap: authentication failed — check your API key.",
+    "load_timeout": "llama-swap: model {model} did not become ready in 3 minutes.",
+    "load_failed": "llama-swap: failed to start loading {model}.",
+    "unload_failed": "llama-swap: failed to unload {model}."
+  }
+}

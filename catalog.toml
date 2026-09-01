@@ -1,0 +1,11 @@
+[[plugin]]
+id = "carlocamacho/llama-swap"
+name = "llama-swap"
+version = "0.2.0"
+author = "CarloCamacho"
+license = "MIT"
+icon = "cpu"
+description = "Monitor and control llama-swap from the bar: live tok/s sparkline and one-click model load/unload."
+plugin_api = 28
+tags = ["bar", "panel", "service", "ai", "network"]
+dependencies = []
