@@ -14,6 +14,7 @@
     "summary_no_data": "Connected — no requests yet",
     "recent_requests": "RECENT",
     "activity_line": "{tps} tok/s · {model} · {duration} · {when}",
+    "spark_caption": "output tokens, last {count} requests",
     "state_loaded": "loaded",
     "state_loading": "loading…",
     "state_unloaded": "unloaded",

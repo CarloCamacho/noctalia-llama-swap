@@ -1,7 +1,7 @@
 [[plugin]]
 id = "carlocamacho/llama-swap"
 name = "llama-swap"
-version = "0.2.0"
+version = "0.2.1"
 author = "CarloCamacho"
 license = "MIT"
 icon = "cpu"

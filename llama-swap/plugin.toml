@@ -1,6 +1,6 @@
 id = "carlocamacho/llama-swap"
 name = "llama-swap"
-version = "0.2.0"
+version = "0.2.1"
 plugin_api = 28
 author = "CarloCamacho"
 license = "MIT"
@@ -50,8 +50,8 @@ entry = "service.luau"
 [[panel]]
 id = "manager"
 entry = "panel.luau"
-width = 520
-height = 640
+width = 480
+height = 420
 placement = "floating"
 position = "center"
 open_near_click = true

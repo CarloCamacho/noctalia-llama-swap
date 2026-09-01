@@ -144,7 +144,9 @@ local function parseActivity(body)
     if i > 24 then break end
     local tok = entry.tokens or {}
     local tps = tok.tokens_per_second or 0
-    table.insert(history, tps)
+    -- sparkline plots output tokens per request: big prompts spike, pings stay
+    -- flat (tok/s is too consistent on a given model to be visually useful)
+    table.insert(history, tok.output_tokens or 0)
     if i <= 6 then
       table.insert(out, {
         id = entry.id,
@@ -165,7 +167,7 @@ local function parseActivity(body)
   for i = #history, 1, -1 do
     table.insert(ordered, history[i])
   end
-  noctalia.state.set("tps_history", ordered)
+  noctalia.state.set("req_tokens_history", ordered)
   return out
 end
 

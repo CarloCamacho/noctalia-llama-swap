@@ -33,7 +33,7 @@ noctalia.state.watch("status", function(v) status = v or "unconfigured"; panelRe
 noctalia.state.watch("models", function(v) models = type(v) == "table" and v or {}; panelRender() end)
 noctalia.state.watch("stats", function(v) stats = type(v) == "table" and v or nil; panelRender() end)
 noctalia.state.watch("activity", function(v) activity = type(v) == "table" and v or {}; panelRender() end)
-noctalia.state.watch("tps_history", function(v) tpsHistory = type(v) == "table" and v or {}; panelRender() end)
+noctalia.state.watch("req_tokens_history", function(v) tpsHistory = type(v) == "table" and v or {}; panelRender() end)
 
 -- -------------------------------------------------------------- actions
 
@@ -168,7 +168,12 @@ local function headerSection()
       color = "primary",
       fillOpacity = 0.2,
       lineWidth = 2,
-      height = 40,
+      height = 36,
+    }))
+    table.insert(children, ui.label({
+      text = tr("spark_caption", { count = tostring(#tpsHistory) }),
+      fontSize = 9,
+      color = "on_surface_variant",
     }))
   elseif status == "connected" then
     table.insert(children, ui.label({ text = tr("summary_no_data"), color = "on_surface_variant", fontSize = 11 }))
@@ -295,7 +300,7 @@ function onOpen(_context)
   models = noctalia.state.get("models") or {}
   stats = noctalia.state.get("stats")
   activity = noctalia.state.get("activity") or {}
-  tpsHistory = noctalia.state.get("tps_history") or {}
+  tpsHistory = noctalia.state.get("req_tokens_history") or {}
   panelRender()
 end
 
