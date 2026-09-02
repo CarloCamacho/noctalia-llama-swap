@@ -164,7 +164,15 @@ local function headerSection()
     })
     table.insert(children, ui.label({ text = line, color = "on_surface_variant", fontSize = 11 }))
     table.insert(children, ui.graph({
-      values = tpsHistory,
+      -- sqrt scale: output tokens swing 2..800+, raw values would pin small
+      -- requests to the floor; sqrt keeps spikes dramatic without flattening
+      values = tpsHistory and (function()
+        local scaled = {}
+        for _, v in ipairs(tpsHistory) do
+          table.insert(scaled, math.sqrt(v))
+        end
+        return scaled
+      end)() or {},
       color = "primary",
       fillOpacity = 0.2,
       lineWidth = 2,
