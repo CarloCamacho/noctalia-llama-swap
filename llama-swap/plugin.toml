@@ -1,6 +1,6 @@
 id = "carlocamacho/llama-swap"
 name = "llama-swap"
-version = "0.2.2"
+version = "0.2.3"
 plugin_api = 28
 author = "CarloCamacho"
 license = "MIT"

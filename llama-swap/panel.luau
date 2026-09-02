@@ -143,6 +143,42 @@ end
 
 -- -------------------------------------------------------------- UI builders
 
+-- Normalize sparkline data to 0..1 relative to the window's min/max (the
+-- proven arch-updater pattern). Raw values render as a flat top-edge line;
+-- normalized values fill the graph height. A flat window centers at 0.5.
+local GRAPH_SUBDIVISIONS = 8
+
+local function normalizeGraph(history)
+  if #history == 0 then return {} end
+
+  local minV, maxV = history[1], history[1]
+  for _, v in ipairs(history) do
+    if v < minV then minV = v end
+    if v > maxV then maxV = v end
+  end
+
+  local range = maxV - minV
+  local values = {}
+  for _, v in ipairs(history) do
+    table.insert(values, range > 0 and (v - minV) / range or 0.5)
+  end
+
+  -- linear upsample so points interpolate into a smooth line
+  local out = {}
+  if #values >= 2 then
+    for i = 1, #values - 1 do
+      local a, b = values[i], values[i + 1]
+      for s = 0, GRAPH_SUBDIVISIONS - 1 do
+        table.insert(out, a + (b - a) * (s / GRAPH_SUBDIVISIONS))
+      end
+    end
+    table.insert(out, values[#values])
+  else
+    out = { values[1], values[1] }
+  end
+  return out
+end
+
 local function headerSection()
   local children = {}
 
@@ -164,15 +200,10 @@ local function headerSection()
     })
     table.insert(children, ui.label({ text = line, color = "on_surface_variant", fontSize = 11 }))
     table.insert(children, ui.graph({
-      -- sqrt scale: output tokens swing 2..800+, raw values would pin small
-      -- requests to the floor; sqrt keeps spikes dramatic without flattening
-      values = tpsHistory and (function()
-        local scaled = {}
-        for _, v in ipairs(tpsHistory) do
-          table.insert(scaled, math.sqrt(v))
-        end
-        return scaled
-      end)() or {},
+      -- ui.graph expects normalized 0..1 values (see arch-updater's activity
+      -- graph): normalize to the window's min/max and upsample so small
+      -- swings render as visible peaks instead of a flat top-edge line
+      values = normalizeGraph(tpsHistory),
       color = "primary",
       fillOpacity = 0.2,
       lineWidth = 2,

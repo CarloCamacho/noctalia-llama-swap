@@ -139,14 +139,15 @@ local function parseActivity(body)
   if type(parsed) ~= "table" or type(parsed.data) ~= "table" then return nil end
 
   local out = {}
-  local history = {}
+  local spark = {}
   for i, entry in ipairs(parsed.data) do
-    if i > 24 then break end
+    if i > 100 then break end
     local tok = entry.tokens or {}
-    local tps = tok.tokens_per_second or 0
-    -- sparkline plots output tokens per request: big prompts spike, pings stay
-    -- flat (tok/s is too consistent on a given model to be visually useful)
-    table.insert(history, tok.output_tokens or 0)
+    -- health-check pings (tiny outputs, fire every few seconds) would fill the
+    -- sparkline with a flat line and push real requests out of the window
+    if (tok.output_tokens or 0) >= 5 then
+      table.insert(spark, tok.output_tokens or 0)
+    end
     if i <= 6 then
       table.insert(out, {
         id = entry.id,
@@ -155,17 +156,18 @@ local function parseActivity(body)
         status = entry.resp_status_code or 0,
         input_tokens = tok.input_tokens or 0,
         output_tokens = tok.output_tokens or 0,
-        tps = tps,
+        tps = tok.tokens_per_second or 0,
         prompt_tps = tok.prompt_per_second or 0,
         duration_ms = entry.duration_ms or 0,
         timestamp = entry.timestamp or "",
       })
     end
   end
-  -- sparkline wants oldest -> newest
+  -- sparkline wants oldest -> newest; keep at most 24 real requests
   local ordered = {}
-  for i = #history, 1, -1 do
-    table.insert(ordered, history[i])
+  local startIdx = math.max(1, #spark - 23)
+  for i = #spark, startIdx, -1 do
+    table.insert(ordered, spark[i])
   end
   noctalia.state.set("req_tokens_history", ordered)
   return out
