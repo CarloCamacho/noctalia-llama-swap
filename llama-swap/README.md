@@ -43,8 +43,10 @@ The panel shows:
 
 - **Summary line** — last request throughput plus total requests and output
   tokens served since llama-swap started.
-- **Sparkline** — output tokens per request over the last 24 requests
-  (sqrt-scaled so small requests stay visible next to large ones).
+- **Sparkline** — output tokens per request over the last 24 *real* requests
+  (health-check pings under 5 output tokens are filtered out; values
+  min/max-normalized for display so small requests stay visible next to
+  large ones).
 - **RECENT** — the three most recent requests with throughput, model, latency
   and age.
 - **Model list** — every model configured in llama-swap with play/stop

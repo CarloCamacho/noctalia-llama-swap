@@ -46,7 +46,10 @@ Click it for the manager panel:
  └────────────────────────────────────────────┘
 ```
 
-- **Live tok/s sparkline** — output tokens across your last 24 requests; big prompts spike, quick pings hug the floor
+- **Live output-token sparkline** — output tokens per request across your
+  last 24 real requests (health-check pings filtered out); big prompts spike,
+  smaller answers dip. Values are auto-normalized so small requests stay
+  visible next to large ones.
 - **Recent requests** — three compact inline lines: throughput · model · latency · age
 - **One-click load/unload** — every configured model gets a play/stop button right in the list
 - **Zero-config on localhost** — defaults to `http://localhost:8080`, add an API key only if your llama-swap sets `apiKeys`
