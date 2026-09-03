@@ -6,7 +6,7 @@
 
 [![Noctalia](https://img.shields.io/badge/Noctalia-v5-blueviolet)](https://noctalia.dev)
 [![llama-swap](https://img.shields.io/badge/llama--swap-API%20compatible-brightgreen)](https://github.com/mostlygeek/llama-swap)
-[![Version](https://img.shields.io/badge/version-0.2.3-orange)]()
+[![Version](https://img.shields.io/badge/version-0.3.0-orange)]()
 [![License: MIT](https://img.shields.io/badge/license-MIT-lightgrey)](LICENSE)
 
 </div>

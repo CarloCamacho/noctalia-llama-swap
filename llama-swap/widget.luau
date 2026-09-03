@@ -108,8 +108,23 @@ function update()
   render()
 end
 
+-- Pick a panel size that fits the model list: the host fixes panel sizes at
+-- manifest level, so we register three panel entries (S/M/L) sharing one
+-- script and open the one that matches the current model count.
+local function panelIdForCount(n)
+  if n <= 2 then return "manager-s" end
+  if n <= 4 then return "manager-m" end
+  return "manager-l"
+end
+
+local modelCount = 0
+
+noctalia.state.watch("model_count", function(value)
+  modelCount = value or 0
+end)
+
 function onClick()
-  noctalia.togglePanel("carlocamacho/llama-swap:manager")
+  noctalia.togglePanel("carlocamacho/llama-swap:" .. panelIdForCount(modelCount))
 end
 
 function onRightClick()

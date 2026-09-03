@@ -185,6 +185,7 @@ end
 local function publishModels()
   mergeLoadedFlags()
   noctalia.state.set("models", models)
+  noctalia.state.set("model_count", #models)
   local count = 0
   for id, run in pairs(runningInfo) do
     if run.state == "ready" then count = count + 1 end

@@ -1,6 +1,6 @@
 id = "carlocamacho/llama-swap"
 name = "llama-swap"
-version = "0.2.3"
+version = "0.3.0"
 plugin_api = 28
 author = "CarloCamacho"
 license = "MIT"
@@ -47,12 +47,34 @@ entry = "widget.luau"
 id = "poller"
 entry = "service.luau"
 
+# Three size tiers sharing panel.luau; the widget picks one based on the
+# number of models configured on the server.
 [[panel]]
-id = "manager"
+id = "manager-s"
 entry = "panel.luau"
 width = 480
-height = 420
-placement = "floating"
-position = "center"
+height = 310
+placement = "attached"
+position = "auto"
+open_near_click = true
+dismiss_on_outside_click = true
+
+[[panel]]
+id = "manager-m"
+entry = "panel.luau"
+width = 480
+height = 430
+placement = "attached"
+position = "auto"
+open_near_click = true
+dismiss_on_outside_click = true
+
+[[panel]]
+id = "manager-l"
+entry = "panel.luau"
+width = 480
+height = 560
+placement = "attached"
+position = "auto"
 open_near_click = true
 dismiss_on_outside_click = true

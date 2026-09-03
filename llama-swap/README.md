@@ -53,11 +53,15 @@ The panel shows:
   buttons. Loading warms the model via `/upstream/{id}/v1/models` (the same
   call llama-swap's own web UI makes); unloading uses
   `POST /api/models/unload/{id}`. Model IDs containing slashes are handled.
+- **Adaptive panel size** — the plugin ships three panel tiers (S/M/L) and
+  the bar widget opens the one that fits the current model count: small for
+  ≤2 models, medium for ≤4, large for more.
 
-Open or close the panel without the bar widget:
+Open or close the panel without the bar widget (size tiers: `manager-s` ≤2
+models, `manager-m` ≤4, `manager-l` more):
 
 ```sh
-noctalia msg panel-toggle carlocamacho/llama-swap:manager
+noctalia msg panel-toggle carlocamacho/llama-swap:manager-l
 ```
 
 ## Settings
