@@ -67,8 +67,10 @@ llama-server instances:
 - Widget: glyph color transitions verified across idle → loading → ready →
   unreachable (server stopped/started) and auth-failed (wrong API key).
 - Panel: opened via bar click and via
-  `noctalia msg panel-toggle carlocamacho/llama-swap:manager`; summary, sparkline,
-  recent requests and model list all render from live data.
+  `noctalia msg panel-toggle carlocamacho/llama-swap:manager-l`; summary,
+  sparkline, recent requests and model list all render from live data.
+- Adaptive sizing: verified with a 2-model config (S tier) and a 7-model
+  config (L tier) — model rows fit without overflow in both.
 - Load/unload: loaded and unloaded models (including a model id without
   slashes and a config containing multiple models); spinner shows while a load
   is pending, inline `loaded` label appears when ready; unload stops the
@@ -88,13 +90,12 @@ llama-server instances:
 
 - Thumbnail (960×540, official generator): `llama-swap/thumbnail.webp` — shows
   the live panel with real data.
-- Live panel capture while a model is loaded and requests are flowing:
-
-![llama-swap panel running with live data](https://raw.githubusercontent.com/CarloCamacho/noctalia-llama-swap/main/llama-swap/thumbnail.webp)
-
-<!-- Replace/append with a screencap or short video link from your own setup
-     before submitting — the template requires visual evidence for anything
-     with a visual surface. -->
+- Panel anchored to the bar widget on a real click (attached/open-near-click):
+  https://raw.githubusercontent.com/CarloCamacho/noctalia-llama-swap/main/assets/panel-attached.png
+- 29s demo clip — click glyph → panel opens anchored → play → spinner →
+  `loaded` (bar text updates live) → playground prompt streaming while the
+  sparkline reacts:
+  https://raw.githubusercontent.com/CarloCamacho/noctalia-llama-swap/main/assets/llama-swap-demo.mp4
 
 ## Checklist
 
